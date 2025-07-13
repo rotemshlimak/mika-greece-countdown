@@ -1,5 +1,5 @@
 /**
- * Mika's Greece Pilion Vacation Countdown Chart
+ * Mika's 🇬🇷 יוון Pilion Vacation Countdown Chart
  * Hebrew RTL Interactive Calendar
  */
 
@@ -75,7 +75,7 @@ class MikaCountdown {
         
         // Start from today
         const startDate = new Date(this.today);
-        const endDate = new Date(this.vacationDate);
+        const endDate = new Date(this.vacationDate); // Include August 21
         
         let currentMonth = -1;
         let currentDate = new Date(startDate);
@@ -115,18 +115,29 @@ class MikaCountdown {
         const dayName = `יום ${hebrewDays[date.getDay()]}`;
 
         // Check if this is the flight day (August 21st)
-        const isFlightDay = (date.getTime() === this.vacationDate.getTime());
+        const flightDate = new Date('2025-08-21');
+        flightDate.setHours(0, 0, 0, 0);
+        const isFlightDay = (date.getTime() === flightDate.getTime());
         
         // Check if this is a pre-flight day (August 19th and 20th)
-        const isPreFlightDay = (date.getTime() === new Date('2025-08-19').getTime()) || 
-                              (date.getTime() === new Date('2025-08-20').getTime());
+        const preFlightDate1 = new Date('2025-08-19');
+        preFlightDate1.setHours(0, 0, 0, 0);
+        const preFlightDate2 = new Date('2025-08-20');
+        preFlightDate2.setHours(0, 0, 0, 0);
+        const isPreFlightDay = (date.getTime() === preFlightDate1.getTime()) || 
+                              (date.getTime() === preFlightDate2.getTime());
         
         if (isFlightDay) {
-            // Flight day with same format as today
+            // Special flight day - Mika is flying to Greece
+            console.log('Flight day detected for date:', formattedDate);
             dayElement.classList.add('flight-day');
-            const flightDayNameDiv = `<div class="calendar-dayname" style="text-align:center;background:#FFD700;color:#fff;font-weight:bold;padding:4px 0;border-radius:6px 6px 0 0;">${dayName}</div>`;
-            const flightDateDiv = `<div class="calendar-date" style="text-align:center;background:#ffe0b2;color:#222;padding:4px 0;">תאריך: ${formattedDate}</div>`;
-            const flightDestinationDiv = `<div class="calendar-remaining" style="text-align:center;background:#ffe082;color:#222;padding:4px 0;border-radius:0 0 6px 6px;">✈️ טסה ליוון! 🇬🇷</div>`;
+            dayElement.style.transform = 'scale(1.1)';
+            dayElement.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.8)';
+            dayElement.style.border = '3px solid #FFD700';
+            
+            const flightDayNameDiv = `<div class="calendar-dayname" style="text-align:center;background:#FFD700;color:#fff;font-weight:bold;padding:4px 0;border-radius:6px 6px 0 0;">🛫 ${dayName} 🛫</div>`;
+            const flightDateDiv = `<div class="calendar-date" style="text-align:center;background:#ffe0b2;color:#222;padding:4px 0;">📅 ${formattedDate}</div>`;
+            const flightDestinationDiv = `<div class="calendar-remaining" style="text-align:center;background:#ffe082;color:#222;padding:4px 0;border-radius:0 0 6px 6px;">✈️ מיקה טסה ליוון! 🇬🇷✨</div>`;
             dayElement.innerHTML = `${flightDayNameDiv}${flightDateDiv}${flightDestinationDiv}`;
             dayElement.style.cursor = 'pointer';
             dayElement.addEventListener('click', () => {
@@ -142,14 +153,24 @@ class MikaCountdown {
         } else if (isPreFlightDay) {
             // Pre-flight preparation days
             dayElement.classList.add('pre-flight-day');
-            const prepMessage = date.getDate() === 19 ? 'הכנות לטיסה' : 'ארזון מזוודות';
+            const prepMessage = date.getDate() === 19 ? 'הכנות לטיסה' : 'אריזת מזוודות';
             dayElement.innerHTML = `
                 <div class="calendar-dayname" style="text-align:center;background:#ff6b35;color:#fff;font-weight:bold;padding:4px 0;border-radius:6px 6px 0 0;">${dayName} 🧳</div>
                 <div class="calendar-date" style="text-align:center;background:#ffe0b2;color:#222;padding:4px 0;">${formattedDate}</div>
                 <div class="calendar-remaining" style="text-align:center;background:#ffd54f;color:#222;padding:4px 0;border-radius:0 0 6px 6px;">${prepMessage}</div>
             `;
-            dayElement.style.cursor = 'pointer';
-            dayElement.addEventListener('click', () => this.toggleDay(dayElement, date));
+            
+            // Only allow clicking if the date is today or in the past
+            if (date.getTime() <= this.today.getTime()) {
+                dayElement.style.cursor = 'pointer';
+                dayElement.addEventListener('click', () => this.toggleDay(dayElement, date));
+            } else {
+                // Future pre-flight days are not clickable
+                dayElement.style.cursor = 'not-allowed';
+                dayElement.addEventListener('click', () => {
+                    this.showNotification('לא ניתן לסמן ימים עתידיים');
+                });
+            }
             
         } else {
             // Regular countdown days
@@ -348,7 +369,7 @@ class MikaCountdown {
         try {
             // Set cookie to expire after vacation date (August 28, 2025)
             const expirationDate = new Date('2025-08-29'); // Day after vacation
-            this.setCookie('mikaGreeceCountdownProgress', JSON.stringify(this.markedDays), expirationDate);
+            this.setCookie('mika🇬🇷CountdownProgress', JSON.stringify(this.markedDays), expirationDate);
         } catch (error) {
             console.error('Failed to save progress:', error);
         }
@@ -356,7 +377,7 @@ class MikaCountdown {
 
     loadProgress() {
         try {
-            const saved = this.getCookie('mikaGreeceCountdownProgress');
+            const saved = this.getCookie('mika🇬🇷CountdownProgress');
             return saved ? JSON.parse(saved) : [];
         } catch (error) {
             console.error('Failed to load progress:', error);
