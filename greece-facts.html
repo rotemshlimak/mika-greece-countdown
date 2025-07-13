@@ -24,7 +24,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            background: linear-gradient(135deg, #F0FFF0 0%, #90EE90 50%, #32CD32 100%);
             min-height: 100vh;
             font-family: 'Assistant', sans-serif;
         }
@@ -34,22 +34,24 @@
             margin-bottom: 40px;
             color: white;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #00FF7F, #32CD32);
             border-radius: 20px;
             backdrop-filter: blur(10px);
+            box-shadow: 0 15px 40px rgba(50, 205, 50, 0.4);
+            border: 3px solid #90EE90;
         }
         
         .facts-header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(34, 139, 34, 0.6);
         }
         
         .back-button {
             position: fixed;
             top: 20px;
             left: 20px;
-            background: #ff6b6b;
+            background: linear-gradient(135deg, #FF7F50, #FF6B6B);
             color: white;
             border: none;
             padding: 12px 20px;
@@ -59,27 +61,32 @@
             z-index: 1000;
             transition: all 0.3s ease;
             font-family: 'Assistant', sans-serif;
+            box-shadow: 0 5px 15px rgba(255, 127, 80, 0.4);
         }
         
         .back-button:hover {
-            background: #ff5252;
+            background: linear-gradient(135deg, #FF6B6B, #FF5252);
             transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 127, 80, 0.6);
         }
         
         .fact-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, rgba(248, 248, 255, 0.95), rgba(240, 255, 240, 0.95));
             margin: 30px 0;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 40px rgba(50, 205, 50, 0.2);
             backdrop-filter: blur(10px);
+            border: 3px solid #90EE90;
         }
         
         .fact-section h2 {
-            color: #0083b0;
+            color: #32CD32;
             font-size: 1.8em;
             margin-bottom: 20px;
             text-align: center;
+            font-family: 'Fredoka One', cursive;
+            text-shadow: 1px 1px 2px rgba(50, 205, 50, 0.2);
         }
         
         .fact-content {
@@ -92,7 +99,7 @@
         .fact-text {
             font-size: 1.1em;
             line-height: 1.8;
-            color: #333;
+            color: #228B22;
         }
         
         .fact-image {
@@ -105,35 +112,39 @@
             height: 250px;
             object-fit: cover;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(50, 205, 50, 0.3);
+            border: 2px solid #90EE90;
         }
         
         .image-placeholder {
             width: 100%;
             max-width: 400px;
             height: 250px;
-            background: linear-gradient(45deg, #87CEEB, #4682B4);
+            background: linear-gradient(45deg, #98FB98, #00FF7F);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4em;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(34, 139, 34, 0.6);
+            box-shadow: 0 8px 25px rgba(50, 205, 50, 0.3);
+            border: 2px solid #90EE90;
         }
         
         .fun-facts {
-            background: #f0f8ff;
+            background: linear-gradient(135deg, #F0FFF0, #98FB98);
             padding: 20px;
             border-radius: 15px;
             margin: 20px 0;
-            border-left: 5px solid #00b4db;
+            border-left: 5px solid #32CD32;
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.2);
         }
         
         .fun-facts h3 {
-            color: #0083b0;
+            color: #32CD32;
             margin-bottom: 15px;
+            font-weight: 600;
         }
         
         .fun-facts ul {
@@ -145,6 +156,7 @@
             padding: 8px 0;
             position: relative;
             padding-right: 25px;
+            color: #228B22;
         }
         
         .fun-facts li:before {
